@@ -1,0 +1,6 @@
+{
+  "name": "TMAC Immunoblot Expert",
+  "description": "(주)티맥 - 21세기 바이오 선도기업 면역블롯 기반 단백질 분석 기술과 분석용 항체 콜렉션 기술 개발",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
