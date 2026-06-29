@@ -6,6 +6,11 @@ import karyotypeImage from '../assets/images/karyotype_fluorescence_178212552989
 import cellNucleiImage from '../assets/images/cell_nuclei_imaging_1782125546738.jpg';
 import dnaHelixImage from '../assets/images/dna_helix_render_1782125561216.jpg';
 
+// 사용자 요청에 따른 로컬 이미지 임포트
+import antibody_Image from '../assets/images/antibody.png';
+import immunoblot_Image from '../assets/images/immunoblot.png';
+import miria_Image from '../assets/images/miria_system.png';
+
 interface HomeViewProps {
   setView: (view: string) => void;
   lang: 'ko' | 'en';
@@ -185,117 +190,114 @@ export default function HomeView({ setView, lang, onSelectNotice, onSelectPaper 
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
             
-            {/* Circle 1 - New Immunoblot Platform */}
-            <div className="bg-white border border-slate-100 rounded-xl p-6 text-center hover:shadow-xl transition-all hover:scale-[1.01] flex flex-col items-center">
-              <div className="w-24 h-24 rounded-full border-4 border-emerald-500 overflow-hidden shadow-md flex items-center justify-center bg-emerald-50 mb-6 group-hover:rotate-6">
+            {/* Circle 1 - New Immunoblot Platform - DOUBLE SIZE & LOCAL IMAGE */}
+            <div className="bg-white border border-slate-100 rounded-xl p-8 text-center hover:shadow-xl transition-all hover:scale-[1.01] flex flex-col items-center">
+              <div className="w-48 h-48 rounded-full border-8 border-emerald-500 overflow-hidden shadow-xl flex items-center justify-center bg-emerald-50 mb-10 group-hover:rotate-6">
                 <img
-                  src="https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?auto=format&fit=crop&q=80&w=200"
-                  alt="Gel arrays"
+                  src={immunoblot_Image}
+                  alt="Immunoblot technology"
                   className="w-full h-full object-cover hover:scale-110 transition-transform"
-                  placeholder="Immunoblot array"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <h4 className="text-base font-bold text-slate-900">
+              <h4 className="text-lg font-bold text-slate-900">
                 {lang === 'ko' ? 'New Immunoblot Platform' : 'New Immunoblot Platform'}
               </h4>
-              <div className="h-[2px] w-12 bg-emerald-500 my-3"></div>
-              <ul className="text-xs text-slate-600 text-left space-y-2 mt-2 leading-relaxed">
+              <div className="h-[3px] w-16 bg-emerald-500 my-4"></div>
+              <ul className="text-sm text-slate-600 text-left space-y-2.5 mt-2 leading-relaxed">
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
                   <span>{lang === 'ko' ? '반응 시간 85% 이상 대폭 단축' : '85% response time reduction'}</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
                   <span>{lang === 'ko' ? '고가 시약 및 시료 사용량 최소화' : 'Minimal chemical & sample volume'}</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
                   <span>{lang === 'ko' ? '고효율 다채널 면역블롯 어레이 연계' : 'High-density immunoblot arrays'}</span>
                 </li>
               </ul>
               <button
                 onClick={() => setView('ingel')}
-                className="mt-6 text-xs text-emerald-600 hover:text-emerald-700 font-bold flex items-center gap-1 group cursor-pointer"
+                className="mt-8 text-sm text-emerald-600 hover:text-emerald-700 font-bold flex items-center gap-1.5 group cursor-pointer"
               >
                 {lang === 'ko' ? '상세히 보기' : 'Check Details'}
-                <ChevronRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
+                <ChevronRight className="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" />
               </button>
             </div>
 
-            {/* Circle 2 - MiRIA System */}
-            <div className="bg-white border border-slate-100 rounded-xl p-6 text-center hover:shadow-xl transition-all hover:scale-[1.01] flex flex-col items-center">
-              <div className="w-24 h-24 rounded-full border-4 border-orange-500 overflow-hidden shadow-md flex items-center justify-center bg-orange-50 mb-6">
+            {/* Circle 2 - MiRIA System - DOUBLE SIZE & LOCAL IMAGE */}
+            <div className="bg-white border border-slate-100 rounded-xl p-8 text-center hover:shadow-xl transition-all hover:scale-[1.01] flex flex-col items-center">
+              <div className="w-48 h-48 rounded-full border-8 border-orange-500 overflow-hidden shadow-xl flex items-center justify-center bg-orange-50 mb-10">
                 <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=200"
-                  alt="Engineering"
+                  src={miria_Image}
+                  alt="Automated MiRIA system"
                   className="w-full h-full object-cover hover:scale-110 transition-transform"
-                  placeholder="Mechanical design"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <h4 className="text-base font-bold text-slate-900">
+              <h4 className="text-lg font-bold text-slate-900">
                 {lang === 'ko' ? 'MiRIA System' : 'MiRIA System'}
               </h4>
-              <div className="h-[2px] w-12 bg-orange-500 my-3"></div>
-              <ul className="text-xs text-slate-600 text-left space-y-2 mt-2 leading-relaxed">
+              <div className="h-[3px] w-16 bg-orange-500 my-4"></div>
+              <ul className="text-sm text-slate-600 text-left space-y-2.5 mt-2 leading-relaxed">
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
+                  <span className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0"></span>
                   <span>{lang === 'ko' ? '전체 면역블롯 소량 어레이 자동화' : 'Automated high-density blot assay'}</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0"></span>
+                  <span className="w-2 h-2 rounded-full bg-orange-400 flex-shrink-0"></span>
                   <span>{lang === 'ko' ? '다중 대량 시료 및 다중 항체 교차 분석' : 'Multi-sample, multi-antibody profiling'}</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0"></span>
+                  <span className="w-2 h-2 rounded-full bg-orange-400 flex-shrink-0"></span>
                   <span>{lang === 'ko' ? 'MiRIA 시스템 전용 소모품 공급 가속' : 'Dedicated MiRIA consumables'}</span>
                 </li>
               </ul>
               <button
                 onClick={() => setView('roadmap')}
-                className="mt-6 text-xs text-orange-600 hover:text-orange-700 font-bold flex items-center gap-1 group cursor-pointer"
+                className="mt-8 text-sm text-orange-600 hover:text-orange-700 font-bold flex items-center gap-1.5 group cursor-pointer"
               >
                 {lang === 'ko' ? '상세히 보기' : 'Check Details'}
-                <ChevronRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
+                <ChevronRight className="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" />
               </button>
             </div>
 
-            {/* Circle 3 - Antibody Collection */}
-            <div className="bg-white border border-slate-100 rounded-xl p-6 text-center hover:shadow-xl transition-all hover:scale-[1.01] flex flex-col items-center">
-              <div className="w-24 h-24 rounded-full border-4 border-indigo-500 overflow-hidden shadow-md flex items-center justify-center bg-indigo-50 mb-6">
+            {/* Circle 3 - Antibody Collection - DOUBLE SIZE & LOCAL IMAGE */}
+            <div className="bg-white border border-slate-100 rounded-xl p-8 text-center hover:shadow-xl transition-all hover:scale-[1.01] flex flex-col items-center">
+              <div className="w-48 h-48 rounded-full border-8 border-indigo-500 overflow-hidden shadow-xl flex items-center justify-center bg-indigo-50 mb-10">
                 <img
-                  src="https://images.unsplash.com/photo-1579684389782-64d84b5e901d?auto=format&fit=crop&q=80&w=200"
-                  alt="Antibody"
+                  src={antibody_Image}
+                  alt="Validated antibodies"
                   className="w-full h-full object-cover hover:scale-110 transition-transform"
-                  placeholder="Bio structure"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <h4 className="text-base font-bold text-slate-900">
+              <h4 className="text-lg font-bold text-slate-900">
                 {lang === 'ko' ? 'Antibody Collection' : 'Antibody Collection'}
               </h4>
-              <div className="h-[2px] w-12 bg-indigo-500 my-3"></div>
-              <ul className="text-xs text-slate-600 text-left space-y-2 mt-2 leading-relaxed">
+              <div className="h-[3px] w-16 bg-indigo-500 my-4"></div>
+              <ul className="text-sm text-slate-600 text-left space-y-2.5 mt-2 leading-relaxed">
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0"></span>
+                  <span className="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></span>
                   <span>{lang === 'ko' ? '검증된 글로벌 연구용 항체 라이브러리' : 'Validated primary antibody list'}</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0"></span>
+                  <span className="w-2 h-2 rounded-full bg-indigo-400 flex-shrink-0"></span>
                   <span>{lang === 'ko' ? '이차 항체 정량 검증 및 발현 프로파일링' : 'Secondary validations & profiling'}</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0"></span>
+                  <span className="w-2 h-2 rounded-full bg-indigo-400 flex-shrink-0"></span>
                   <span>{lang === 'ko' ? '산업용 맞춤형 고친화성 신규 항체 개발' : 'New high-affinity custom antibodies'}</span>
                 </li>
               </ul>
               <button
                 onClick={() => setView('products')}
-                className="mt-6 text-xs text-indigo-600 hover:text-indigo-700 font-bold flex items-center gap-1 group cursor-pointer"
+                className="mt-8 text-sm text-indigo-600 hover:text-indigo-700 font-bold flex items-center gap-1.5 group cursor-pointer"
               >
                 {lang === 'ko' ? '상세히 보기' : 'Check Details'}
-                <ChevronRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
+                <ChevronRight className="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" />
               </button>
             </div>
 

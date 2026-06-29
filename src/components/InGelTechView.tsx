@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ShieldCheck, Flame, Cpu, ArrowRight, Zap, RefreshCw, Layers, Home } from 'lucide-react';
 import microscopeHeroImage from '../assets/images/microscope_lenses_1782188765192.jpg';
 
@@ -9,6 +9,33 @@ interface InGelTechViewProps {
 
 export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
   const [activeTab, setActiveTab] = useState<'convenience' | 'reproducible' | 'automation'>('convenience');
+  
+  // 드롭다운 메뉴 열림/닫힘 상태
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // 메뉴 컨테이너 Ref
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // 메뉴 영역 밖을 클릭했을 때만 드롭다운 닫기
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // 드롭다운 항목 클릭 시 페이지 이동 후 메뉴 닫기
+  const handleNavigation = (viewName: string) => {
+    if (setView) {
+      setView(viewName);
+    }
+    setIsMenuOpen(false);
+  };
 
   // Interactive bullet cards information
   const tabsInfo = {
@@ -87,7 +114,7 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
         </div>
       </div>
 
-      {/* Sub-Navigation Breadcrumb (Consistent Design under Banner) */}
+      {/* Sub-Navigation Breadcrumb */}
       <div className="w-full bg-slate-50 border-b border-slate-200 py-3 text-slate-600 select-none">
         <div className="max-w-5xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between flex-wrap gap-4 text-xs font-medium">
           {/* Left aligned chain */}
@@ -110,10 +137,42 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
             
             <span className="text-slate-300">/</span>
 
-            <div className="relative inline-block">
-              <span className="text-emerald-700 font-bold px-2 py-1 rounded bg-white border border-emerald-200 flex items-center gap-1 shadow-3xs">
+            {/* Hover Dropdown Menu Wrapper */}
+            <div 
+              ref={dropdownRef}
+              className="relative inline-block"
+              onMouseEnter={() => setIsMenuOpen(true)}
+              onMouseLeave={() => setIsMenuOpen(false)}
+            >
+              <span className="text-emerald-700 font-bold px-2 py-1 rounded bg-white border border-emerald-200 flex items-center gap-1 shadow-3xs cursor-pointer">
                 {lang === 'ko' ? '인겔 웨스턴 블롯' : 'In-Gel Western'}
               </span>
+              
+              {/* Dropdown menu: pt-2 패딩을 주어 텍스트와 메뉴 사이의 간극 마우스 이탈 방지 */}
+              {isMenuOpen && (
+                <div className="absolute left-0 top-full pt-2 w-44 z-50">
+                  <div className="bg-white border border-slate-200 rounded shadow-md py-1 flex flex-col">
+                    <button 
+                      onClick={() => handleNavigation('overview')} 
+                      className="text-left px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-50 hover:text-emerald-600 cursor-pointer"
+                    >
+                      {lang === 'ko' ? '개요' : 'Overview'}
+                    </button>
+                    <button 
+                      onClick={() => handleNavigation('immunoblot')} 
+                      className="text-left px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-50 hover:text-emerald-600 cursor-pointer"
+                    >
+                      {lang === 'ko' ? '면역블롯소개' : 'Immunoblot Intro'}
+                    </button>
+                    <button 
+                      onClick={() => handleNavigation('papers')} 
+                      className="text-left px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-50 hover:text-emerald-600 cursor-pointer"
+                    >
+                      {lang === 'ko' ? '관련논문보기' : 'Related Papers'}
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -204,7 +263,7 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
           </div>
         </div>
 
-        {/* Comparative Scientific Visual Diagram (RECREATES Image 1 Grid layout) */}
+        {/* Comparative Scientific Visual Diagram */}
         <div className="border border-slate-200 rounded-xl p-6 md:p-8 bg-slate-50 shadow-2xs mb-10">
           <div className="text-center mb-6">
             <span className="text-[10px] font-mono uppercase bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-bold">
@@ -217,7 +276,7 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
 
           <div className="space-y-8">
             
-            {/* Flow A: Conventional (Grey, tedious) */}
+            {/* Flow A: Conventional */}
             <div className="border border-red-100 bg-red-50/20 rounded-lg p-5">
               <div className="flex items-center gap-2 mb-4 border-b border-red-50 pb-2">
                 <span className="bg-red-600 text-white font-extrabold px-2.5 py-0.5 rounded-sm text-xs">A</span>
@@ -226,10 +285,7 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
                 </span>
               </div>
               
-              {/* Steps Horiz Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                
-                {/* Step A1 */}
                 <div className="bg-white p-3 rounded border border-slate-150 flex flex-col items-center shadow-3xs relative">
                   <span className="text-[10px] text-slate-400 font-bold font-mono">1. SDS-PAGE</span>
                   <div className="w-12 h-10 border border-slate-300 my-2 rounded flex flex-col gap-0.5 p-1 bg-sky-50">
@@ -241,7 +297,6 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
                   <p className="text-[10px] text-slate-500 leading-snug">{lang === 'ko' ? '단백질 분리' : 'Protein separation'}</p>
                 </div>
 
-                {/* Step A2 */}
                 <div className="bg-white p-3 rounded border border-slate-150 flex flex-col items-center shadow-3xs relative">
                   <span className="text-[10px] text-slate-400 font-bold font-mono">2. Blot (Transfer)</span>
                   <div className="w-12 h-10 border border-red-400 my-2 rounded flex items-center justify-center bg-red-50 gap-1.5 p-1">
@@ -252,7 +307,6 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
                   <p className="text-[10px] text-slate-500 leading-snug">{lang === 'ko' ? '멤브레인 이동 (blow-away 발생 가능)' : 'Membrane Transfer (loss risk)'}</p>
                 </div>
 
-                {/* Step A3 */}
                 <div className="bg-white p-3 rounded border border-slate-150 flex flex-col items-center shadow-3xs relative">
                   <span className="text-[10px] text-slate-400 font-bold font-mono">3. Blocking</span>
                   <div className="w-12 h-10 border border-yellow-300 my-2 rounded flex items-center justify-center bg-yellow-50 p-1">
@@ -261,7 +315,6 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
                   <p className="text-[10px] text-slate-500 leading-snug">{lang === 'ko' ? '비특이 반응 차단 (60분~밤샘)' : 'Block sites'}</p>
                 </div>
 
-                {/* Step A4 */}
                 <div className="bg-white p-3 rounded border border-slate-150 flex flex-col items-center shadow-3xs relative">
                   <span className="text-[10px] text-slate-400 font-bold font-mono">4. Probe & Film</span>
                   <div className="w-12 h-10 border border-slate-400 my-2 rounded flex flex-col justify-center items-center gap-0.5 p-1 bg-slate-900">
@@ -271,11 +324,10 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
                   </div>
                   <p className="text-[10px] text-slate-500 leading-snug">{lang === 'ko' ? '1/2차 항체 결합 및 아날로그 노출' : 'Exposure signals'}</p>
                 </div>
-
               </div>
             </div>
 
-            {/* Flow B: In-Gel (Emerald, automated, fast) */}
+            {/* Flow B: In-Gel */}
             <div className="border border-emerald-200 bg-emerald-50/20 rounded-lg p-5">
               <div className="flex items-center gap-2 mb-4 border-b border-emerald-100 pb-2">
                 <span className="bg-emerald-600 text-white font-extrabold px-2.5 py-0.5 rounded-sm text-xs">B</span>
@@ -288,10 +340,7 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
                 </span>
               </div>
               
-              {/* Steps Horiz Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                
-                {/* Step B1 */}
                 <div className="bg-white p-3 rounded border border-emerald-150 flex flex-col items-center shadow-3xs hover:border-emerald-500 transition-colors">
                   <span className="text-[10px] text-emerald-700 font-bold font-mono">1. SDS-PAGE</span>
                   <div className="w-12 h-10 border border-emerald-300 my-2 rounded flex flex-col gap-0.5 p-1 bg-emerald-50">
@@ -303,7 +352,6 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
                   <p className="text-[10px] text-emerald-900 leading-snug font-medium">{lang === 'ko' ? '동일 전기영동' : 'Same gel process'}</p>
                 </div>
 
-                {/* Step B2 -> Capture (UV Expose) */}
                 <div className="bg-white p-3 rounded border border-emerald-150 flex flex-col items-center shadow-3xs hover:border-emerald-500 transition-colors group">
                   <span className="text-[10px] text-emerald-700 font-bold font-mono">2. Capture (UV Expose)</span>
                   <div className="w-12 h-10 border border-purple-300 my-2 rounded flex items-center justify-center bg-purple-50 p-1 relative overflow-hidden">
@@ -317,7 +365,6 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
                   </p>
                 </div>
 
-                {/* Step B3 -> Decrosslinking */}
                 <div className="bg-white p-3 rounded border border-emerald-150 flex flex-col items-center shadow-3xs hover:border-emerald-500 transition-colors">
                   <span className="text-[10px] text-emerald-700 font-bold font-mono">3. Decrosslinking</span>
                   <div className="w-12 h-10 border border-sky-300 my-2 rounded flex items-center justify-center bg-sky-50 p-1">
@@ -328,7 +375,6 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
                   </p>
                 </div>
 
-                {/* Step B4 -> Direct Probe */}
                 <div className="bg-white p-3 rounded border border-emerald-150 flex flex-col items-center shadow-3xs hover:border-emerald-500 transition-colors">
                   <span className="text-[10px] text-emerald-700 font-bold font-mono">4. Direct Probe</span>
                   <div className="w-12 h-10 border border-emerald-300 my-2 rounded flex flex-col justify-center items-center gap-0.5 p-1 bg-slate-900">
@@ -340,7 +386,6 @@ export default function InGelTechView({ lang, setView }: InGelTechViewProps) {
                     {lang === 'ko' ? '겔 내 직접 형광 하이브리드 검출' : 'Assay directly inside gel'}
                   </p>
                 </div>
-
               </div>
             </div>
 

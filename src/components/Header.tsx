@@ -28,6 +28,8 @@ export default function Header({ currentView, setView, lang, setLang }: HeaderPr
       nameKo: '기술소개',
       nameEn: 'Technology',
       submenus: [
+        // '개요' 서브메뉴 추가
+        { id: 'overview', nameKo: '개요', nameEn: 'Overview' },
         { id: 'ingel', nameKo: '인겔 웨스턴 블롯 시스템', nameEn: 'In-Gel Western Blot' },
         { id: 'immunoblot', nameKo: '면역 블롯 소개', nameEn: 'Immunoblot Intro' },
         { id: 'papers', nameKo: '관련 논문 보기', nameEn: 'Research Papers' }

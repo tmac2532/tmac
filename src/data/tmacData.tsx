@@ -1,10 +1,15 @@
 import prosisTpage from '../assets/images/prosis_tpage_1782125788486.jpg';
 import gelGloveHand from '../assets/images/gel_glove_hand_1782126175435.jpg';
-import prosisMinipage from '../assets/images/miniPAGE-4_1.jpg';
+import prosisMinipage from '../assets/images/miniPAGE-4_1.JPG';
 import prosisMinitransfer from '../assets/images/prosis_minitransfer_1782125815384.jpg';
 import prosisMinihorizon from '../assets/images/prosis_minihorizon_1782125831224.jpg';
 import prosisMidihorizon from '../assets/images/prosis_midihorizon_1782125845562.jpg';
 import prosisEps300 from '../assets/images/prosis_eps300_1782125857579.jpg';
+
+import prosisMinipageComb from '../assets/images/miniPAGE-4_Comb_1.JPG';
+import prosisMinipageElectro from '../assets/images/miniPAGE-4_Electro probe 2.JPG';
+import prosisMinipageCaster from '../assets/images/miniPAGE-4_Gel caster.JPG';
+import prosisMinipagetank from '../assets/images/miniPAGE-4_Gel tank.JPG';
 
 export interface Product {
   id: string;
@@ -30,6 +35,8 @@ export interface Paper {
   titleEn: string;
   summaryKo: string;
   summaryEn: string;
+  abstractKo?: string; // 👈 물음표(?)를 붙여 선택적 속성으로 변경
+  abstractEn?: string; // 👈 물음표(?)를 붙여 선택적 속성으로 변경
   author: string;
   date: string;
   views: number;
@@ -120,8 +127,8 @@ export const PRODUCTS: Product[] = [
     ],
     imageUrl: prosisMinipage,
     productDescriptionImageUrl: prosisMinipage,
-    thumbnailImages: [prosisMinipage],
-    referenceBottomImage: [prosisTpage, gelGloveHand]
+    thumbnailImages: [prosisMinipage,prosisMinipageComb ,prosisMinipageElectro,prosisMinipageCaster ,prosisMinipagetank ],
+    referenceBottomImage: [prosisMinipage,prosisMinipageComb ,prosisMinipageElectro,prosisMinipageCaster ,prosisMinipagetank ]
   },
   {
     id: 'prosis-minitransfer',
