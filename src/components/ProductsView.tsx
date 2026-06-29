@@ -25,7 +25,7 @@ export default function ProductsView({ lang, setView }: ProductsViewProps) {
   const [clientEmail, setClientEmail] = useState('');
   const [clientTel, setClientTel] = useState('');
   
-  // 제목 및 메시지 상태
+  // 수량 항목 및 관련 상태를 완전히 제거하고, 제목(inquiryTitle)과 메시지 상태만 운영
   const [inquiryTitle, setInquiryTitle] = useState('');
   const [message, setMessage] = useState('');
   
@@ -71,7 +71,7 @@ export default function ProductsView({ lang, setView }: ProductsViewProps) {
     try {
       const passwordInput = (document.getElementById('inquiry-pw') as HTMLInputElement)?.value || '1234';
 
-      // DB 테이블 스키마에 맞게 Insert (수량은 1 고정)
+      // DB 스키마에 맞게 Insert (수량은 1 고정)
       await supabase.from('inquiries').insert([{
         name: clientName,
         email: clientEmail,
@@ -178,7 +178,7 @@ export default function ProductsView({ lang, setView }: ProductsViewProps) {
               {lang === 'ko' ? '제품소개' : 'Products Portfolio'}
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold text-slate-950 mt-3">
-              {lang === 'ko' ? '프로시스 제품군' : 'Prosis Products'}
+              {lang === 'ko' ? '프로시스 제품군 카탈로그' : 'Prosis Product Solutions'}
             </h2>
           </div>
 
@@ -204,7 +204,7 @@ export default function ProductsView({ lang, setView }: ProductsViewProps) {
             className="w-full pl-11 pr-4 py-3.5 border border-slate-200 rounded-xl text-xs md:text-sm bg-white shadow-3xs focus:outline-emerald-600 focus:ring-2 focus:ring-emerald-600/10" />
         </div>
 
-        {/* Product Grid (수량 선택 영역 및 관련 UI 완전 제거) */}
+        {/* Product Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((p) => (
             <div key={p.id} className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-2xs hover:shadow-xl hover:border-emerald-500 hover:scale-[1.01] transition-all flex flex-col justify-between group">
@@ -423,7 +423,7 @@ export default function ProductsView({ lang, setView }: ProductsViewProps) {
                       <input type="tel" value={clientTel} onChange={(e) => setClientTel(e.target.value)} placeholder="Tel" className="w-full p-2.5 border border-slate-200 rounded text-xs bg-slate-50" />
                     </div>
                     
-                    {/* 제품명 정보만 심플하게 노출 (수량 표시 및 제어 로직 완전 삭제) */}
+                    {/* 제품명 정보만 심플하게 노출 (수량 수식/뱃지 완전 삭제) */}
                     <div className="p-3 bg-slate-50 border border-slate-100 rounded text-[10px] text-slate-600 font-bold font-mono">
                       <span>PRODUCT: {inquiryProduct.name}</span>
                     </div>
